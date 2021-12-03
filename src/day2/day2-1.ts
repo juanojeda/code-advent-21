@@ -1,4 +1,11 @@
 import { ErrorOr, isError, logger } from "../utils";
+import {
+  BaseMethod,
+  BaseMethodStore,
+  Instruction,
+  Position,
+  readInstructions
+} from "./shared";
 
 const testInput = `forward 5
 down 5
@@ -1009,60 +1016,15 @@ forward 4
 forward 8
 `;
 
-export enum METHOD_KEY {
-  DOWN = "down",
-  UP = "up",
-  FORWARD = "forward"
-}
-
-export type Instruction = {
-  readonly method: METHOD_KEY;
-  readonly value: number;
-};
-
-export type Position = {
-  readonly x: number;
-  readonly y: number;
-};
-
-export interface BaseMethod<P> {
-  (position: P, val: number): P;
-}
-
 type Method = BaseMethod<Position>;
 
-export type BaseMethodStore<P> = {
-  readonly [key in METHOD_KEY]: BaseMethod<P>;
-};
-
 type MethodStore = BaseMethodStore<Position>;
-
-const isMethodKey = (maybeKey: string): maybeKey is METHOD_KEY =>
-  Object.values(METHOD_KEY).includes(maybeKey as METHOD_KEY);
-
-const streamToInstructionsRx = /(\w+) (\w+)$/gm;
-
-const matchToInstruction = (match: RegExpMatchArray): ErrorOr<Instruction> => {
-  const [_, method, preVal] = match;
-  const value = Number(preVal);
-  return isMethodKey(method) && !isNaN(value)
-    ? {
-        method,
-        value
-      }
-    : new Error(`Broken instruction: ${match}`);
-};
-
-export const readInstructions = (
-  stream: string
-): readonly ErrorOr<Instruction>[] =>
-  Array.from(stream.matchAll(streamToInstructionsRx), matchToInstruction);
 
 const forward: Method = ({ x, y }, val) => ({ x: x + val, y });
 const up: Method = ({ x, y }, val) => ({ x, y: y - val });
 const down: Method = ({ x, y }, val) => ({ x, y: y + val });
 
-export const createSub =
+const createSub =
   (methods: MethodStore) =>
   (
     instructions: readonly ErrorOr<Instruction>[],
@@ -1082,4 +1044,4 @@ const moveSub = createSub({ forward, up, down });
 const finalPosition = moveSub(instructions, startPos);
 const positionProduct = getPositionProduct(finalPosition);
 
-logger(`Position product: ${positionProduct}`);
+logger("Position product:", positionProduct);

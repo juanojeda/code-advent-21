@@ -210,5 +210,5 @@ const measurementWindows = getMeasurementWindows(realInput);
 const windowSums = getWindowSums(measurementWindows);
 const pt2IncreaseCount = getIncreaseCount(windowSums);
 
-logger(`pt1 increase: ${pt1IncreaseCount}`);
-logger(`pt1 increase: ${pt2IncreaseCount}`);
+logger("pt1 increase", pt1IncreaseCount);
+logger("pt2 increase", pt2IncreaseCount);

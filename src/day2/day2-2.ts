@@ -1,11 +1,11 @@
+import { ErrorOr, isError } from "../utils";
 import {
   BaseMethod,
   BaseMethodStore,
   Instruction,
   Position,
   readInstructions
-} from "./day2-1";
-import { ErrorOr, isError } from "../utils";
+} from "./shared";
 
 const testInput = `forward 5
 down 5
