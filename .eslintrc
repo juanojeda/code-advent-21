@@ -1,0 +1,15 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "functional"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:functional/recommended",
+    "plugin:functional/stylistic"
+  ],
+  "rules": {
+    "functional/no-expression-statement": "warn",
+    "functional/no-return-void": "warn"
+  }
+}
