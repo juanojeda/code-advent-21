@@ -1,4 +1,4 @@
-import { ErrorOr, isError, logger } from "./utils";
+import { ErrorOr, isError, logger } from "../utils";
 
 const testInput = `forward 5
 down 5

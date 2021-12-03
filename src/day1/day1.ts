@@ -1,4 +1,4 @@
-import { logger } from "./utils";
+import { logger } from "../utils";
 
 const realInput = [
   103, 112, 111, 133, 132, 128, 136, 138, 133, 136, 137, 140, 144, 156, 155,

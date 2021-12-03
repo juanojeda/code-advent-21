@@ -5,7 +5,7 @@ import {
   Position,
   readInstructions
 } from "./day2-1";
-import { ErrorOr, isError } from "./utils";
+import { ErrorOr, isError } from "../utils";
 
 const testInput = `forward 5
 down 5
